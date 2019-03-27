@@ -15,7 +15,7 @@ import javax.persistence.NamedQuery;
 
 @Entity
 @NamedQuery(name = "find_all_employees", query = "select e from Employee e")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Employee {
 
 	@Id
