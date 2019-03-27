@@ -1,9 +1,9 @@
 insert into course(id,created_date, name) values(10001 ,sysdate(),'JPA Hibernate Tutorial');
-insert into course(id,created_date, name) values(10002 ,sysdate(),'Microservices with Spring Boot Tutorial');
+insert into course(id,created_date, name) values(10002 ,sysdate(),'Microservices Tutorial with Spring Boot');
 insert into course(id,created_date, name) values(10003 ,sysdate(),'RabbitMq');
 insert into course(id,created_date, name) values(10004 ,sysdate(),'SAP Cloud Platform');
 insert into course(id,created_date, name) values(10005 ,sysdate(),'WEB Apps With SAP Ui5');
-insert into course(id,created_date, name) values(10006 ,sysdate(),'Docker With JAVA');
+insert into course(id,created_date, name) values(10006 ,sysdate(),'Docker With JAVA Tutorial');
 insert into course(id,created_date, name) values(10007 ,sysdate(),'Kubernetes');
 
 insert into passport(id, number) values(40001 ,'S12342452');
