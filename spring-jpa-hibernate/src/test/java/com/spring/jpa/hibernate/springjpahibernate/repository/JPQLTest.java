@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -58,36 +59,53 @@ public class JPQLTest {
 
 	@Test
 	public void findCoursesWithoutStudents() {
-		
+
 		TypedQuery<Course> query = em.createQuery("select c from Course c where c.students is empty ", Course.class);
-		
+
 		List<Course> resultList = query.getResultList();
-		
+
 		assertNotNull(resultList);
-		
-		logger.info("select c from Course c where c.students is empty --> {}",resultList );
-		
+
+		logger.info("select c from Course c where c.students is empty --> {}", resultList);
+
 	}
 
 	@Test
 	public void findCoursesWithAtleast2Students() {
-		
+
 		TypedQuery<Course> query = em.createQuery("select c from Course c where size(c.students) >= 2 ", Course.class);
-		
+
 		List<Course> resultList = query.getResultList();
-		
-		logger.info("select c from Course c where size(c.students) >= 2 --> {}",resultList );
-		
+
+		logger.info("select c from Course c where size(c.students) >= 2 --> {}", resultList);
+
 	}
 
 	@Test
 	public void findCoursesOrderedByStudents() {
-		
-		TypedQuery<Course> query = em.createQuery("select c from Course c order by size(c.students) desc", Course.class);
-		
+
+		TypedQuery<Course> query = em.createQuery("select c from Course c order by size(c.students) desc",
+				Course.class);
+
 		List<Course> resultList = query.getResultList();
-		
-		logger.info("elect c from Course c order by size(c.students) --> {}",resultList );
-		
+
+		logger.info("elect c from Course c order by size(c.students) --> {}", resultList);
+
+	}
+
+	@Test
+	@Transactional
+	public void jpqlJoin() {
+
+		Query query = em.createQuery("select c,s from Course c JOIN c.students s ");
+
+		List<Object[]> resultList = query.getResultList();
+
+		logger.info("Join Result Size  --> {}", resultList.size());
+
+		for (Object[] result : resultList) {
+			logger.info("Course : {} Student {} ", result[0], result[1]);
+		}
+
 	}
 }
