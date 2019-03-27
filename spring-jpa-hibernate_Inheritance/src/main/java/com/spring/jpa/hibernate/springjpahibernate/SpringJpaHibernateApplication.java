@@ -1,5 +1,7 @@
 package com.spring.jpa.hibernate.springjpahibernate;
 
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,8 +15,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.spring.jpa.hibernate.springjpahibernate.entity.Course;
+import com.spring.jpa.hibernate.springjpahibernate.entity.Employee;
+import com.spring.jpa.hibernate.springjpahibernate.entity.FullTimeEmployee;
+import com.spring.jpa.hibernate.springjpahibernate.entity.PartTimeEmployee;
 import com.spring.jpa.hibernate.springjpahibernate.entity.Student;
 import com.spring.jpa.hibernate.springjpahibernate.repository.CourseRepository;
+import com.spring.jpa.hibernate.springjpahibernate.repository.EmployeeRepository;
 import com.spring.jpa.hibernate.springjpahibernate.repository.StudentRepository;
 
 @SpringBootApplication
@@ -27,6 +33,9 @@ public class SpringJpaHibernateApplication implements CommandLineRunner {
  
 	@Autowired
 	private StudentRepository studentRepository;
+
+	@Autowired
+	private EmployeeRepository employeeRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringJpaHibernateApplication.class, args);
@@ -53,6 +62,14 @@ public class SpringJpaHibernateApplication implements CommandLineRunner {
 		
 		Student findById = studentRepository.findById(20002l);
 		studentRepository.insertStudentAndCourse(findById, courses);
+		
+		employeeRepository.insert(new FullTimeEmployee("Monty", new BigDecimal("140000")));
+		employeeRepository.insert(new PartTimeEmployee("Sweetu", new BigDecimal("70")));
+		
+		List<Employee> allEmployees = employeeRepository.getAllEmployees();
+		
+		
+		logger.info("Employees Inserted are ---> {}",allEmployees);
 		
 		
 		
