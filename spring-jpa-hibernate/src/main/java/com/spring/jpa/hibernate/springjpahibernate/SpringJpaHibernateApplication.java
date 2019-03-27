@@ -44,16 +44,16 @@ public class SpringJpaHibernateApplication implements CommandLineRunner {
 //		
 //		logger.info("All Courses : {} ", repository.findAllCourses());
 		
-		studentRepository.saveStudentWithPassport();
-		repository.addReviewforCourse(10003l);
-		
-		List<Course> courses =  new ArrayList<>();
-		courses.add(new Course("Dummy Course 1"));
-		courses.add(new Course("Dummy Course 2"));
-		
-		Student findById = studentRepository.findById(20002l);
-		studentRepository.insertStudentAndCourse(findById, courses);
-		
+		/*
+		 * studentRepository.saveStudentWithPassport();
+		 * repository.addReviewforCourse(10003l);
+		 * 
+		 * List<Course> courses = new ArrayList<>(); courses.add(new
+		 * Course("Dummy Course 1")); courses.add(new Course("Dummy Course 2"));
+		 * 
+		 * Student findById = studentRepository.findById(20002l);
+		 * studentRepository.insertStudentAndCourse(findById, courses);
+		 */	
 		
 		
 	}
