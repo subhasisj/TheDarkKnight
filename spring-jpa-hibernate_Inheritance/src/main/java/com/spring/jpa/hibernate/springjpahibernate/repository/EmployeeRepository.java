@@ -13,6 +13,8 @@ import org.springframework.stereotype.Repository;
 
 import com.spring.jpa.hibernate.springjpahibernate.entity.Course;
 import com.spring.jpa.hibernate.springjpahibernate.entity.Employee;
+import com.spring.jpa.hibernate.springjpahibernate.entity.FullTimeEmployee;
+import com.spring.jpa.hibernate.springjpahibernate.entity.PartTimeEmployee;
 import com.spring.jpa.hibernate.springjpahibernate.entity.Review;
 
 @Repository
@@ -36,9 +38,14 @@ public class EmployeeRepository {
 			em.persist(employee);
 	}
 
-	public List<Employee> getAllEmployees() {
+	public List<PartTimeEmployee> getAllPartTimeEmployees() {
 		
-		return em.createNamedQuery("find_all_employees",Employee.class).getResultList();
+		return em.createNamedQuery("find_all_parttimeemployees",PartTimeEmployee.class).getResultList();
+	}
+
+	public List<FullTimeEmployee> getAllFullTimeEmployees() {
+		
+		return em.createNamedQuery("find_all_fulltimeemployees",FullTimeEmployee.class).getResultList();
 	}
 	
 }

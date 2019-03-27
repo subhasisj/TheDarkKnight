@@ -10,12 +10,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.NamedQuery;
 
 
-@Entity
-@NamedQuery(name = "find_all_employees", query = "select e from Employee e")
-@Inheritance(strategy = InheritanceType.JOINED)
+@MappedSuperclass
+@NamedQuery(name = "find_all_parttimeemployees", query = "select e from PartTimeEmployee e")
+@NamedQuery(name = "find_all_fulltimeemployees", query = "select e from FullTimeEmployee e")
 public abstract class Employee {
 
 	@Id

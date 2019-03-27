@@ -18,6 +18,8 @@ import com.spring.jpa.hibernate.springjpahibernate.entity.Employee;
 import com.spring.jpa.hibernate.springjpahibernate.entity.FullTimeEmployee;
 import com.spring.jpa.hibernate.springjpahibernate.entity.PartTimeEmployee;
 
+import junit.framework.AssertionFailedError;
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SpringJpaHibernateApplication.class )
@@ -30,14 +32,45 @@ public class EmployeeRepositoryTest {
 	@Test
 	public void insertEmployeeAndVerify() {
 
-		employeeRepository.insert(new FullTimeEmployee("Monty", new BigDecimal("140000")));
-		employeeRepository.insert(new PartTimeEmployee("Sweetu", new BigDecimal("70")));
+		employeeRepository.insert(new FullTimeEmployee("Subhasis", new BigDecimal("140000")));
+		employeeRepository.insert(new PartTimeEmployee("Avilipsha", new BigDecimal("70")));
 		
-		List<Employee> allEmployees = employeeRepository.getAllEmployees();
+		List<PartTimeEmployee> allPartTimeEmployees = employeeRepository.getAllPartTimeEmployees();
+		List<FullTimeEmployee> allFullTimeEmployees = employeeRepository.getAllFullTimeEmployees();
 		
-		assertEquals(2 , allEmployees.size());
 		
-		logger.info("Employees Inserted are ---> {}",allEmployees);
+		assertTrue(findFullTimeEmployee(allFullTimeEmployees, "Subhasis") );
+		assertTrue(findPartTimeEmployee(allPartTimeEmployees, "Avilipsha") );
+		
+		
+		logger.info("Part Time Employees Inserted are ---> {}",allPartTimeEmployees);
+		logger.info("Full Time Employees Inserted are ---> {}",allFullTimeEmployees);
+	}
+
+	private boolean findFullTimeEmployee(List<FullTimeEmployee> allFullTimeEmployees , String nameTofind) {
+		
+		for (Employee employee : allFullTimeEmployees) {
+			
+			if (employee.getName().equals(nameTofind)) {
+				
+				return true;
+			}
+		}
+		
+		return false;
+	}
+
+	private boolean findPartTimeEmployee(List<PartTimeEmployee> allPartTimeEmployees , String nameTofind) {
+		
+		for (Employee employee : allPartTimeEmployees) {
+			
+			if (employee.getName().equals(nameTofind)) {
+				
+				return true;
+			}
+		}
+		
+		return false;
 	}
 	
 	@Test
